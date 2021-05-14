@@ -1,10 +1,10 @@
 const TableHead = (props) => {
   const { tableData } = props;
   const tableHead = Object.keys(tableData[0]).map((data, index) => (
-    <td key={index}>{data}</td>
+    <th key={index}>{data}</th>
   ));
 
-  return <th>{tableHead}</th>;
+  return <tr>{tableHead}</tr>;
 };
 
 export default TableHead;
