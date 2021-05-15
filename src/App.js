@@ -1,6 +1,7 @@
 import "./styles.css";
 import React, { Component } from "react";
 import Table from "./Table";
+import axios from "axios";
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 
@@ -14,15 +15,11 @@ class App extends Component {
     tableData: null
   };
 
-  getTable() {
-    // return <Table tableData={this.state.tableData}></Table>;
-    return <div>Hello</div>;
-  }
-
-  async componentDidMount() {
-    let response = await fetch(URL);
-    let responseData = await response.json();
-    this.setState({ isLoading: false, tableData: responseData });
+  componentDidMount() {
+    axios.get(URL).then((res) => {
+      console.log(res);
+      this.setState({ isLoading: false, tableData: res.data });
+    });
   }
 
   render() {
@@ -34,6 +31,7 @@ class App extends Component {
       return <div>No data fetched</div>;
     }
     console.log(this.state.tableData[0]);
+
     return <Table tableData={this.state.tableData} />;
     // return <button onClick={() => this.getTable()}>show Table data </button>;
   }
